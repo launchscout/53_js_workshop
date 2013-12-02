@@ -5,6 +5,10 @@ describe("Let's make an object", function() {
     };
     var keys = [];
     var values = [];
+    for(var key in thing) {
+        keys.push(key);
+        values.push(thing[key]);
+    }
     it("keys should be the keys", function() {
         expect(keys).toEqual(["name", "description"]);
     });
