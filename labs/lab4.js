@@ -7,7 +7,7 @@ describe("About var", function() {
         var message = "Outer";
 
         function overrideMessage() {
-          message = "Inner";
+          var message = "Inner";
           return message;
         }
 
@@ -22,7 +22,7 @@ describe("About var", function() {
         var message = "Outer"
 
         function changeMessage(newMessage) {
-            var message = newMessage;
+            message = newMessage;
         }
 
         changeMessage("the new message");
