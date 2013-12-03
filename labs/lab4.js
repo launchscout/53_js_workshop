@@ -1,5 +1,8 @@
 describe("About var", function() {
 
+    // The rule: You may only add or remove
+    // var to solve this lab!
+
     describe("to var", function() {
         var message = "Outer";
 
