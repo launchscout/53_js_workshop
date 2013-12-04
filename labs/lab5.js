@@ -10,7 +10,7 @@ describe("equals and threequals", function() {
         0 == '',
         '' == 0,
         0 === '',
-        '' == 0,
+        '' === 0,
     ];
 
     it("should make a big difference which you choose", function() {
