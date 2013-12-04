@@ -5,7 +5,7 @@ describe("Invoking a function", function() {
         }
 
         it("can be defined globally and invoked", function() {
-          expect(whatsMyName()).toEqual("Fred")
+          expect().toEqual("Fred")
         });
     });
 
@@ -13,7 +13,7 @@ describe("Invoking a function", function() {
         function Person (name) {
           this.name = name;
         }
-        var person = new Person('Fred');
+        var person = // use new create a Person!
 
         it("can invoke a function with new to construct an object", function() {
             expect(person.name).toEqual("Fred");
@@ -27,7 +27,7 @@ describe("Invoking a function", function() {
           }
         }; 
         it("can invoke a function defined within an object", function() {
-            expect(person.getName()).toEqual("Fred");
+            expect().toEqual("Fred");
         });
     });
 
@@ -39,10 +39,12 @@ describe("Invoking a function", function() {
           name: "Fred"
         }; 
         it("can call apply() on the function passing in the context and an array of arguments", function() {
-            expect(formalPersonName.apply(person,["Mr","Esq"])).toEqual("Mr Fred Esq");
+            // use apply()
+            expect().toEqual("Mr Fred Esq");
         });
         it("can call call() on the function passing in the context and arguments", function() {
-            expect(formalPersonName.call(person,"Mr","Esq")).toEqual("Mr Fred Esq");
+            // use call()
+            expect().toEqual("Mr Fred Esq");
         });
     });
 });
