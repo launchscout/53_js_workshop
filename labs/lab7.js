@@ -3,8 +3,7 @@ describe("Closures",function () {
     var name = "charli";
 
     return function () {
-      name = name + "e";
-      return name;
+      // write the implementation that makes the tests pass!
     };
   };
   var changeName = returningFunction()
@@ -17,7 +16,7 @@ describe("Closures",function () {
   var iterator = {
     currentStep: 1,
     step: function () {
-      return this.currentStep += 1;
+      // write the implementation that makes the tests pass!
     }
   };
 
@@ -25,7 +24,7 @@ describe("Closures",function () {
     var currentStep = 1;
     return { 
       step: function () {
-        return currentStep += 1;
+        // write the implementation that makes the tests pass!
       }
     };
   }();
