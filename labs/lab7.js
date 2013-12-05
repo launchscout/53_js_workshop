@@ -35,7 +35,9 @@ describe("Closures",function () {
     iteratorModule.currentStep = 3;
     it("protect internals better than a constructed object", function () {
       expect(iterator.step()).toEqual(4);
+      expect(iterator.step()).toEqual(5);
       expect(iteratorModule.step()).toEqual(2);
+      expect(iteratorModule.step()).toEqual(3);
     });
   });
 });
