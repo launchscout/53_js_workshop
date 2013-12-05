@@ -1,9 +1,7 @@
 describe("Higher Order Functions", function() {
 
   function greet () {
-    return function (name) {
-      return "Hello my name is " + name;
-    } 
+    // return a function that makes the test pass
   }
   var foo = greet() 
 
@@ -11,9 +9,7 @@ describe("Higher Order Functions", function() {
     expect(foo("Sam")).toEqual("Hello my name is Sam");
   });
 
-  function greeting (greet,name) {
-    return greet(name);
-  };
+  // define a greeting function that takes two arguments
 
   it("can take functions as arguments", function () {
     expect(greeting(greet(),"Sam")).toEqual("Hello my name is Sam");
