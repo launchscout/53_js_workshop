@@ -1,0 +1,4 @@
+Create a variable that makes the assertion pass
+--
+var ...;
+assert(x + x === 4, "x + x should equal 4");

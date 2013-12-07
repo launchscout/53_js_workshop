@@ -1,0 +1,10 @@
+Make the doubleMe function return the argument type followed by the value doubled for numbers and the string repeated twice for strings.
+--
+function doubleMe (val) {
+
+}
+
+assert(doubleMe(17) === 'number 34', 
+  '17 doubled should equal "number 34"');
+assert(doubleMe('painnkaak') === 'string painnkaakpainnkaak', 
+  'painnkaak doubled should equal "string painnkaakpainnkaak"');
