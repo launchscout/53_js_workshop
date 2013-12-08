@@ -35,7 +35,7 @@ describe("The Prototype Chain", function () {
 
         describe("that can be overridden", function () {
           var dolphin = new Mammal("dolphin");
-          // override the value of furry on the dolphin object to make line 39 pass
+          // override the value of furry on the dolphin object to make line 41 pass
 
           it("on the object", function () {
             expect(dolphin.furry).toEqual(false);
