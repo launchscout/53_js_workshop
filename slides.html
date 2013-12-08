@@ -298,8 +298,9 @@ An operator which return the elemental type of its argument
     object.foo = "baz";
     object.bing = "wuzza";
     object["new property"] = "foo";
-### More about objects later...
 
+### Removing a property
+    delete object.foo
 ---
 layout: false
 class: center, inverse, middle
@@ -391,6 +392,8 @@ class: center, middle
 class: center, middle
 # Decisions, decisions
 ---
+# Operators
+---
 # Meet array
     var array = [1, 2, 3, 4];
 
@@ -456,11 +459,60 @@ class: center, middle
 
 ---
 
-# Literals
+# More about objects
+
+## Objects can contain other objects
+
+    object = {
+      foo: "bar"
+      baz: {
+        bing: 3
+      }
+    }
+
+    object.baz.foo    // 3
+
+### but be careful
+    object.wuzza.foo  // causes a ReferenceError!
+### so safety first
+    object.wuzza && object.wuzza.foo  // returns undefined
+---
+# Methods
+## Objects can also contain functions
+### Methods get a reference to the object they are a property of called `this`
+### It is not implicit!
+    var object = {
+      foo: "bar",
+      accessor: function() {
+        return this.foo;
+      }
+      badAccessor: function() {
+        return foo;
+      }
+    }
+
+    object.accessor()     // "bar"
+    object.badAccessor()  // undefined
+---
+# Methods
+## This is dynamic
+### Bound when the method is invoked
+
+    var method = function() {
+      return this.foo;
+    };
+
+    var object = { foo: "bar" };
+
+    object.accessor = method;
+
+    object.accessor()     // "foo"
+---
+# Higher order functions
+## Functions can return functions
 
 
 ---
-
 # Statements
 
 template: default
