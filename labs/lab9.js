@@ -5,10 +5,10 @@ describe("The Prototype Chain", function () {
       var nativeObjectProtoype = Object.prototype;
 
       it("link to Javascript's native Object.prototype", function () {
-        expect(mammal.__proto__).toEqual(Object.prototype);
+        expect(mammal.__proto__).toEqual(nativeObjectProtoype);
       });
       it("inherit properties and methods from the Object prototype", function () {
-        expect(mammal.toString()).toEqual(Object.prototype.toString());
+        expect(mammal.toString()).toEqual(nativeObjectProtoype.toString());
       });
     });
     describe("objects created using the 'new' constructor", function () {
