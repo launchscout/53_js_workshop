@@ -21,7 +21,7 @@ describe("The Prototype Chain", function () {
       var human = new Mammal("human");
 
       it("link to the new's target function's prototype", function () {
-        expect(human.__proto__).toEqual();
+        expect(human.__proto__).toEqual(/* fill in */);
       });
       
       describe("inherit from the target's prototype", function (){ 
