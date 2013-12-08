@@ -1,0 +1,5 @@
+Make a function that quacks, when given a duck
+--
+
+assert(possiblyQuack("Duck") === "Quack", "should quack when given Duck");
+assert(possiblyQuack("Horse") === "Not quack", "should not quack when given anything else");

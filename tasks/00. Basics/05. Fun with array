@@ -1,0 +1,15 @@
+Use a loop to make an array with ten elements
+--
+
+var array = [];
+for(...) {
+    // ...
+}
+
+function sum(array) {
+    // Loop over and sum the elements
+}
+assert(array.length === 10, "Should have ten elements");
+assert(array[0] === 1, "Should start with 1");
+assert(array[9] === 10, "Should end with 10");
+assert(sum(array) === 55, "Should sum the elements in the array");

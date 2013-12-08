@@ -63,9 +63,11 @@
     <textarea id="source">
 class: center, middle, inverse
 
-# JavaScript: The Good Parts
+# Client-side web development
 
-### by [@gnab](http://twitter.com/gnab) &amp; [@torgeir](http://twitter.com/torgeir)
+### Chris Nelson
+### [Gaslight](http://gaslight.co)
+### [@superchris](http://twitter.com/superchris)
 
 ---
 
@@ -93,19 +95,37 @@ Short, exclusively about JavaScript.
 ---
 class: center, middle
 
-## Editor
-### [http://js-workshop.herokuapp.com](http://js-workshop.herokuapp.com)
-
 ## Slides
-### [http://gnab.github.com/js-workshop](http://gnab.github.com/js-workshop)
+### [http://gaslight.github.io/53_js_workshop/slides.html](http://gaslight.github.io/53_js_workshop/slides.html)
 
 ## Code
-### [http://github.com/gnab/js-workshop](http://github.com/gnab/js-workshop)
+### [http://github.com/gaslight/53_js_workshop](http://github.com/gaslight/53_js_workshop)
 
 ---
+class: center, middle
+
+# Why should I care about javascript?
+
+---
+# How we used to do it
+
+![Old web app arch](old_web_apps.png)
+
+### Page loads every request
+### Client is pretty dumb
+### All the action is on the server side
+---
+# Where we're headed
+
+![New web app arch](new_web_apps.png)
+
+### Client is running the application
+### Server is an api
+---
+
 class: center, middle, inverse
 
-# History
+# A brief history of Javascript
 
 ---
 template: default
@@ -194,17 +214,29 @@ scoped to the current function.
 Global! GAH!
 
 ---
+layout: false
+class: center, middle
+# Our first lab!
+## [http://gaslight.github.io/53_js_workshop](http://gaslight.github.io/53_js_workshop)
+## Choose Hello Javascript
+---
+template: default
+layout: true
 
+### Syntax
+
+---
 ## typeof
 
 An operator which return the elemental type of its argument
 
 ## Elemental types
 
-    typeof 1;           // 'number'
-    typeof '';          // 'string'
-    typeof true;        // 'boolean'
-    typeof {};          // 'object'
+    typeof 1;             // 'number'
+    typeof '';            // 'string'
+    typeof true;          // 'boolean'
+    typeof {};            // 'object'
+    typeof function() {}  // 'function'
 
 ### Most things are actually objects
 
@@ -217,6 +249,14 @@ An operator which return the elemental type of its argument
     undefined
     null
     NaN // Does not equal itself
+---
+## Dynamically typed (not static)
+    var x = 1;
+    x = "seven";
+
+## Weakly typed (not strong)
+    var product = "2" * 25; // product is 50
+
 ---
 # Objects
 
@@ -248,6 +288,7 @@ An operator which return the elemental type of its argument
     obj2["legal_name"]      // "value"
 
 ---
+
 # Updating objects
 
     var object = {
@@ -259,6 +300,59 @@ An operator which return the elemental type of its argument
     object["new property"] = "foo";
 ### More about objects later...
 
+---
+layout: false
+class: center, inverse, middle
+# Let's make an object!
+---
+
+# Functions
+
+    function doSomething() {
+      console.log("doing something");
+    }
+
+### the name is optional
+### and they can be assigned to variables
+    var foo = function() {
+      console.log("foo!");
+    }
+
+    doSomething();  // outputs "doing something"
+    foo();          // outputs "foo!"
+---
+## Functions with arguments and return values
+
+    function sum(a, b, c) {
+      return a + b + c;
+    }
+
+    function saySomething(greetee) {
+      console.log("Hi, " + greetee);
+    }
+
+    console.log(sum(1, 2, 3));   // outputs 6
+
+## functions always return something
+    x = saySomething("World");   // outputs "Hi, World"
+    console.log(x);              // outputs undefined
+
+---
+# Functions can be arguments, too!
+
+    function doSomething(something) {
+      something();
+    }
+
+    doSomething(function() {
+      console.log("I'm doing something!");
+    });
+
+    // Outputs "I'm doing something!"
+---
+layout: false
+class: center, middle
+# Let's make a function
 ---
 # Conditionals
 
@@ -294,7 +388,30 @@ An operator which return the elemental type of its argument
 ## Everything else is truthy
 ## Including "false"!
 ---
+class: center, middle
+# Decisions, decisions
+---
+# Meet array
+    var array = [1, 2, 3, 4];
 
+    array[1]          // 2
+    array[100]        // undefined
+    array.length      // 5
+    array[4] = 5;     // array is now [1, 2, 3, 4, 5];
+
+## You can put in anything you want
+### not limited by type
+    array[2] = "elephant";  // array is now [1, 2, "elephant", 4, 5];
+
+---
+
+## It's a lying liar who lies
+    var array = [1, 2, 3, 4, 5];
+    typeof(array)         // object
+    array[1000] = "foo";
+    array.length          // 1001
+
+---
 # Looping with for
 
     for (var i=0; i < 10; i++) {
@@ -308,6 +425,10 @@ An operator which return the elemental type of its argument
     }
 
 ---
+class: center, middle
+# Let's have some fun with arrays
+
+---
 ## Iterating over an object with for.. in
 
     var object = {foo: "bar", bing: "baz"};
@@ -316,8 +437,11 @@ An operator which return the elemental type of its argument
       console.log(object[key]);
     }
 ---
+class: center, middle
+# Iterating over objects
+
+---
 # Simple looping with do and while
-## do and while
 
     var condition = true;
     while(condition) {
@@ -339,49 +463,6 @@ An operator which return the elemental type of its argument
 
 # Statements
 
----
-
-# Functions
-
-    function doSomething() {
-      console.log("doing something");
-    }
-
-### the name is optional
-
-    var foo = function() {
-      console.log("foo!");
-    }
-
-    doSomething();  // outputs "doing something"
-    foo();          // outputs "foo!"
----
-# Functions with arguments and return values
-
-    function sum(a, b, c) {
-      return a + b + c;
-    }
-
-    function saySomething(greetee) {
-      console.log("Hi, " + greetee);
-    }
-
-    console.log(sum(1, 2, 3));   // outputs 6
-    x = saySomething("World");   // outputs "Hi, World"
-    console.log(x);              // outputs undefined
----
-# Functions can be arguments, too!
-
-    function doSomething(something) {
-      something();
-    }
-
-    doSomething(function() {
-      console.log("I'm doing something!");
-    });
-
-    // Outputs "I'm doing something!"
----
 template: default
 layout: true
 
