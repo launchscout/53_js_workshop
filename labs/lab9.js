@@ -2,6 +2,7 @@ describe("The Prototype Chain", function () {
   describe("all objects are linked to a prototype", function () {
     describe("objects created from literals", function () {
       var mammal = {};
+      var nativeObjectProtoype = Object.prototype;
 
       it("link to Javascript's native Object.prototype", function () {
         expect(mammal.__proto__).toEqual(Object.prototype);
