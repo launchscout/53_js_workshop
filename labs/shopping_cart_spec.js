@@ -1,8 +1,13 @@
 describe("Shopping Cart", function() {
-    var shoppingCart = new Shopping.Cart();
+    var shoppingCart;
+    beforeEach(function() {
+        shoppingCart = new Shopping.Cart();
+    });
     describe("adding items", function() {
-        shoppingCart.addItem({name: "Bread", price: 150});
-        shoppingCart.addItem({name: "Milk", price: 250});
+        beforeEach(function() {
+            shoppingCart.addItem({name: "Bread", price: 150});
+            shoppingCart.addItem({name: "Milk", price: 250});
+        });
         it("should have 2 items", function() {
             expect(shoppingCart.items.length).toEqual(2);
         });
@@ -12,8 +17,10 @@ describe("Shopping Cart", function() {
         });
     });
     describe("total", function() {
-        shoppingCart.addItem({name: "Bread", price: 150});
-        shoppingCart.addItem({name: "Milk", price: 250});
+        beforeEach(function() {
+            shoppingCart.addItem({name: "Bread", price: 150});
+            shoppingCart.addItem({name: "Milk", price: 250});
+        });
         it("should have 2 items", function() {
             expect(shoppingCart.total()).toEqual(400);
         });
