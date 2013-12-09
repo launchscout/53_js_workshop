@@ -3,14 +3,8 @@
 var cart = new Shopping.Cart();
 $(function() {
     $("button").click(function(event) {
-        var item = {
-            name: $("#item").val(),
-            price: parseInt($("#price").val())
-        };
+        // get item somehow
         cart.addItem(item);
-        $("#cart").append($("<li>" + item.name + "</li>"));
-        $("#item").val("");
-        $("#price").val("");
         event.preventDefault();
         $("#total").text(cart.total());
     });
