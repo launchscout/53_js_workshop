@@ -620,7 +620,20 @@ class: center, middle
 class: center, middle
 # Binding scope
 ---
-# Apply
+# Apply/call invocation
+
+Applying functions to objects.
+
+    function doStuff () {
+      return this.speed;
+    }
+
+    var obj = { speed: 2 };
+
+    doStuff.apply(obj, [ arg1, arg2 ]);  // 2
+
+    doStuff.call(obj, arg1, arg2);     // 2
+
 ---
 # Constructor functions
 ## are plain ole functions invoked with new
@@ -676,6 +689,19 @@ class: center, middle
 ---
 class: center, middle
 # Let's do some Inheritance labs1
+
+---
+# arguments
+### You can pass as many or as few arguments to functions as you want
+### Unset arguments are `undefined`
+### `arguments` let's you access an "array" of your functions arguments
+    function logArguments() {
+      var i;
+      for(i =0 ; i < arguments.length; i++)
+      {
+        console.log(arguments[i]);
+      }
+    }
 ---
 class: center, inverse, middle
 # Meet Codio
@@ -700,6 +726,62 @@ class: center, middle, inverse
 ---
 # End of Day 1
 ---
+name: jquery_start
+# jQuery
+### "a fast, small, and feature-rich JavaScript library"
+## Nice abstractions over:
+### DOM traversal and manipulation
+### Event handling
+### AJAX
+---
+# $
+## By default, jQuery is accessible as $
+### jQuery.noConflict() can help if this is a problem
+---
+# ready
+### You generally always want to execute jQuery calls when the DOM is loaded
+### ready() is your "hook" to do this
+
+    $(document).ready(function() {
+      // your code here
+    });
+
+### short form
+    $(function() {
+      // less typing is good.
+    });
+---
+# Selection
+## Call $ with any css selector
+    $("h2");      // returns all h2 nodes
+    $("#main");   // returns element(s) with id="main"
+    $(".happy");  // returns all elements with class="happy"
+
+### Returns all the matching elements
+### But you can get what you need...
+    $("h2").first();
+    $("h2").eq(index);
+    $("h2:first");
+    $("h2").last();
+---
+# $ methods
+### Most jQuery methods are both getters and setters
+### To set, pass an argument
+    var text = $("h1").text();
+    $("h1").text("The new text");
+---
+# Other methods that work this way
+### `html()`
+### `attr()`
+### `width()`
+### `height()`
+### `val()`
+---
+class: center, middle
+# try.jquery.com
+# sections 1.4 - 1.7, 1.11 - 1.13
+---
+
 # Try, throw catch
 
 tr
