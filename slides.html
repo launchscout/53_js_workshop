@@ -511,13 +511,104 @@ class: center, middle
 # Higher order functions
 ## Functions can return functions
 
+    function makeAdder(num) {
+      return function(addend) {
+        return num + addend;
+      }
+    }
 
+    var twoAdder = makeAdder(2);
+    twoAdder(3);      // 5
 ---
-# Statements
+class: center, middle
 
-template: default
-layout: true
+# Higher order functions
+---
+# Scope and Closure
+### functions have access to the parameters and variables of the function they are defined in
+### This is true even after the defining function is no longer executing
 
+    var outerFunction() {
+      var three = 3;
+      return function giveMeAThree() {
+        return three;
+      }
+    }
+---
+# Simulating privacy
+## You can use these facts to roll your own encapsulation
+
+    function buildSequence() {
+      var seq = 0;
+      return {
+        increment: function() {
+          seq++;
+        },
+        currentValue: function() {
+          return seq;
+        }
+      }
+    }
+
+    var sequence = buildSequence();
+    sequence.increment();
+    sequence.increment();
+    sequence.currentValue();    // 2
+---
+class: center, middle
+# Binding scope
+---
+# Apply
+---
+# Constructor functions
+## are plain ole functions invoked with new
+## by convention they start with a capital letter
+## get a new object set to this
+## which is implicitly returned
+---
+# Our first constructor
+
+    function Cat(name) {
+      this.name = name;
+    }
+
+    muffin = new Cat("muffin");
+    tiger = new Cat("tiger");
+    muffin.name       // "muffin"
+    tiger.name        // "tiger"
+### Sometimes called "class" functions
+---
+class: center, middle
+# Let's construct some objects!
+---
+# Introducing the prototype
+### All objects have one
+### It's not easily accessible
+### When accessing a property, if not found the prototype is searched
+### prototypes can have prototypes
+---
+# Constructors and prototypes
+### function objects have a prototype property
+### prototype is what `this` is set to when invoked with new
+    function Cat(name) {
+      this.name = name;
+    }
+
+    Cat.prototype.lives = 9;
+
+    felix = new Cat("Felix");
+    felix.lives         // 9
+
+### you can 'shadow' properties
+    felix.lives = 10
+    garfield = new Cat("Garfield");
+    felix.lives         // 10
+    garfield.lives      // 9
+---
+# Super secret knowledge you should never use
+### An object's prototype is not accessible
+### But there is a super secret __proto__ property
+### Not part of any spec, but all browser's implement it
 ---
 class: center, inverse, middle
 # Meet Codio

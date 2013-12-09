@@ -1,0 +1,13 @@
+Iterate over an object to get its properties and values
+--
+var thing = {
+    name: "Thing 1",
+    description: "A good thing."
+};
+var keys = [];
+var values = [];
+
+assert(keys[0] === "name", "keys are the properties");
+assert(keys[1] === "description", "keys are the properties");
+assert(values[0] === "Thing 1", "values are values");
+assert(values[1] === "A good thing.", "values are values");
