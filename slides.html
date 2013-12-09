@@ -789,7 +789,126 @@ class: center, middle
 # Really end Day 1
 
 ---
+name: jquery_start
+# jQuery
+### "a fast, small, and feature-rich JavaScript library"
+## Nice abstractions over:
+### DOM traversal and manipulation
+### Event handling
+### AJAX
+---
+# $
+## By default, jQuery is accessible as $
+### jQuery.noConflict() can help if this is a problem
+---
+# ready
+### You generally always want to execute jQuery calls when the DOM is loaded
+### ready() is your "hook" to do this
 
+    $(document).ready(function() {
+      // your code here
+    });
+
+### short form
+    $(function() {
+      // less typing is good.
+    });
+---
+# Selection
+## Call $ with any css selector
+    $("h2");      // returns all h2 nodes
+    $("#main");   // returns element(s) with id="main"
+    $(".happy");  // returns all elements with class="happy"
+    $(".happy .sad")  // returns any descendants of .happy that are .sad
+    $(".happy  > .sad")  // returns any directh children of .happy that are .sad
+    $(".happy:first")    // the first .happy
+
+### Returns all the matching elements
+### But you can get what you need...
+    $("h2").first();
+    $("h2").eq(index);
+    $("h2:first");
+    $("h2").last();
+---
+# $ methods
+### Most jQuery methods are both getters and setters
+### To set, pass an argument
+    var text = $("h1").text();
+    $("h1").text("The new text");
+---
+# Other methods that work this way
+### `html()`
+### `attr()`
+### `width()`
+### `height()`
+### `val()`
+---
+class: center, middle
+# try.jquery.com
+# sections 1.4 - 1.7, 1.11 - 1.13
+---
+name: start_day2
+# jQuery manipulation
+### Creating new elements
+    var elem = $("<div>here is something</div>");
+
+### Adding them to the DOM
+
+    elem.appendTo($("#main"));
+
+### or
+
+    $("#main").append(elem);
+
+### Also:
+### prepend/prependTo
+### after/insertAfter
+### before/insertBefore
+---
+# More goodness
+
+### Showing and hiding
+    $(".thing").hide();
+    $(".thing").show();
+
+### Add/remove css classes
+    $(".thing").addClass("red");
+    $(".thing").removeClass("red");
+---
+# Traversing
+### Finding other elements relative to a selector
+    $(".foo").children();   // direct children
+    $(".foo").parents();    // any ancestors
+    $(".foo").parent();     // just Mom (or Dad)
+    $(".foo").siblings();   // any siblings
+
+### They can be refined via a selector
+    $(".foo").parents("div");
+
+### Also
+    $(".foo").closest()
+    $(".foo").find("li")    // Any descendants who are li
+
+---
+# Events
+
+### you can select by attribute, too
+    $("button").on("click", function(event) {
+      // do something important
+    });
+
+### shorthand
+    $("button").click(function() {});
+
+### blur, click, dblClick, change, focusin/focusout, keydown/keyup, mousedown/mouseup, mouseenter/mouseleave
+---
+# event object properties
+### target - the node that triggered
+### type - what kind of event
+### which - specific key or button that was pressed
+### preventDefault() - call to prevent default behavior (loading new page)
+### stopPropagation() - don't bubble up
+---
 # Try, throw catch
 
 tr
