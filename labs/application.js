@@ -5,6 +5,9 @@ $(function() {
     $("button").click(function(event) {
         // get item somehow
         cart.addItem(item);
+        $("#cart").append($("<li>" + item.name + "</li>"));
+        $("#item").val("");
+        $("#price").val("");
         event.preventDefault();
         $("#total").text(cart.total());
     });
