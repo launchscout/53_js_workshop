@@ -756,6 +756,9 @@ name: jquery_start
     $("h2");      // returns all h2 nodes
     $("#main");   // returns element(s) with id="main"
     $(".happy");  // returns all elements with class="happy"
+    $(".happy .sad")  // returns any descendants of .happy that are .sad
+    $(".happy  > .sad")  // returns any directh children of .happy that are .sad
+    $(".happy:first")    // the first .happy
 
 ### Returns all the matching elements
 ### But you can get what you need...
@@ -780,6 +783,11 @@ name: jquery_start
 class: center, middle
 # try.jquery.com
 # sections 1.4 - 1.7, 1.11 - 1.13
+---
+class: center, middle
+
+# Really end Day 1
+
 ---
 
 # Try, throw catch
