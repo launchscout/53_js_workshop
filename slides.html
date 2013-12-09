@@ -909,6 +909,39 @@ name: start_day2
 ### preventDefault() - call to prevent default behavior (loading new page)
 ### stopPropagation() - don't bubble up
 ---
+# Let's make a shopping cart!
+---
+# JSON
+
+### preferred data format for js apps
+### basically, an object literal with strings for keys
+
+    JSON.parse("{'foo': 'bar'}");
+    JSON.stringify({foo: "bar"});
+
+---
+# ajax
+###
+    $.ajax({})
+
+### Lots of options
+
+* url - the url
+* type - type of request (GET, POST, etc)
+* data - data to send
+* complete - function to invoke on complete
+* error - function to invoke on error
+* success - function to invoke on succes
+
+---
+## ajax convenience helpers
+
+    $.get(url, data, successFunc);
+    $.getJSON(url, data, successFunc);
+    $.post(url, data, successFunc);
+---
+# It would be nice if we had items to choose from...
+---
 # Try, throw catch
 
 tr
