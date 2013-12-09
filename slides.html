@@ -57,6 +57,22 @@
       .pushdown {
         margin-top: 12em;
       }
+      table.operators {
+        margin-top: 20px;
+        margin-left: 60px;
+        border: 1px solid black;
+        width: 500px;
+        border-collapse: collapse;
+      }
+      table.operators td {
+        border: 1px solid black;
+        font-size: 1.2em;
+        width: 250px;
+      }
+      table.operators td.header {
+        font-weight: bold;
+      }
+
     </style>
   </head>
   <body>
@@ -260,14 +276,14 @@ An operator which return the elemental type of its argument
 ---
 # Objects
 
-## a set of comma separated key value pairs surrounded by curly braces
+### a set of comma separated key value pairs surrounded by curly braces
     var obj = {
       foo: "bar",
       bing: 4,
     };
 
-## keys can be strings
-## legal javascript names do not need quotes
+### keys can be strings
+### legal javascript names do not need quotes
     var obj2 = {
       legal_name: "value",
       "non-legal-name": "other_value"
@@ -298,9 +314,9 @@ An operator which return the elemental type of its argument
     object.foo = "baz";
     object.bing = "wuzza";
     object["new property"] = "foo";
-
 ### Removing a property
     delete object.foo
+### All properties are public all the time :(
 ---
 layout: false
 class: center, inverse, middle
@@ -389,10 +405,56 @@ class: center, middle
 ## Everything else is truthy
 ## Including "false"!
 ---
+# Comparison
+### `==` compares two things and implicitly converts them
+    "5" == 5      // true
+### `===` compares without type coercion
+    "5" === 5     // false
+### Prefer `===` and `!==`
+---
 class: center, middle
 # Decisions, decisions
 ---
 # Operators
+<table class="operators">
+  <thead>
+    <tr>
+      <td class="header">Operators</td>
+      <td class="header">Type</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>. [] ()</td>
+      <td>Refinement and invocation</td>
+    </tr>
+    <tr>
+      <td>delete new typeof + - !</td>
+      <td>Unary</td>
+    </tr>
+    <tr>
+      <td>* / %</td>
+      <td>Multiplication, division, modulo</td>
+    </tr>
+    <tr>
+      <td>>= <= > <</td>
+      <td>Inequality</td>
+    </tr>
+    <tr>
+      <td>=== !==</td>
+      <td>Equality</td>
+    </tr>
+    <tr>
+      <td>&& ||</td>
+      <td>Logical operators</td>
+    </tr>
+    <tr>
+      <td>?:</td>
+      <td>Ternary</td>
+    </tr>
+  </tbody>
+</table>
+
 ---
 # Meet array
     var array = [1, 2, 3, 4];
@@ -607,8 +669,13 @@ class: center, middle
 ---
 # Super secret knowledge you should never use
 ### An object's prototype is not accessible
-### But there is a super secret __proto__ property
-### Not part of any spec, but all browser's implement it
+### But there is a super secret `__proto__` property
+### Not part of any spec, but all browsers implement it
+### In ES5 we have Object.getPrototypeOf()
+### and Object.create(prototype)
+---
+class: center, middle
+# Let's do some Inheritance labs1
 ---
 class: center, inverse, middle
 # Meet Codio
@@ -630,6 +697,8 @@ class: center, inverse, middle
 ---
 class: center, middle, inverse
 # Lab1
+---
+# End of Day 1
 ---
 # Try, throw catch
 
