@@ -1,3 +1,32 @@
+<!DOCTYPE html>
 <html>
+<head>
+<meta name="description" content="Shopping Cart Exercise" />
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="./labs/shopping_cart.js"></script>
+<script src="./labs/application.js"></script>
+<link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="http://getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+<meta charset=utf-8 />
+<title>JS Bin</title>
+</head>
+<body>
+    My cart:
+    <ul id="cart">
+    </ul>
 
+    <form>
+        <div class="form-group">
+            <label for="item">Item</label>
+            <input id="item" name="item" class="form-control" placeholder="Item name">
+        </div>
+        <div class="form-group">
+            <label for="cost">Cost</label>
+            <input id="cost" name="cost" class="form-control" />
+        </div>
+
+        <button>Add Item</button>
+    </form>
+
+</body>
 </html>
