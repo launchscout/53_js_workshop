@@ -36,6 +36,7 @@
       }
       code {
         background: transparent !important;
+        font-size: 1.4em;
       }
       a {
         color: #F92672;
@@ -273,7 +274,7 @@ An operator which return the elemental type of its argument
     typeof null;        // 'object'
     typeof /^[A-Z]/     // 'object'
     typeof new Date;    // 'object'
-
+---
 ## Some special things
     undefined
     null
@@ -333,7 +334,7 @@ An operator which return the elemental type of its argument
 ---
 layout: false
 class: center, inverse, middle
-# Let's make an object!
+# Fun with objects 
 ---
 
 # Functions
@@ -368,6 +369,16 @@ class: center, inverse, middle
     console.log(x);              // outputs undefined
 
 ---
+# Arity checking? Nah..
+
+    function doIt(x, y)
+    {
+      console.log(y);
+    }
+
+    doIt("wut");                  // outputs undefined
+    doIt("wut", "the", "heck");   // outputs "the" and ignores the extra arg
+---
 # Functions can be arguments, too!
 
     function doSomething(something) {
@@ -380,9 +391,21 @@ class: center, inverse, middle
 
     // Outputs "I'm doing something!"
 ---
+# Higher order functions
+### Just a fancy pants term for functions returning functions
+
+    function makeAdder(num) {
+      return function(addend) {
+        return num + addend;
+      }
+    }
+
+    var twoAdder = makeAdder(2);
+    twoAdder(3);      // 5
+---
 layout: false
 class: center, middle
-# Let's make a function
+# Fun with functions
 ---
 # Conditionals
 
@@ -512,16 +535,106 @@ class: center, middle
 ## Can pass `this` as second argument to forEach
 
 ---
-## More useful Array methods
-  * filter
-  * sort
-  * join
-  * map
-  * indexOf
+## Useful Array methods
+### `filter`
+
+    function isBigEnough(value) {
+      return value >= 10;
+    }
+    var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
+    // filtered is [12, 130, 44]
+### `map`
+Transforms a array
+
+    var numbers = [1, 4, 9];
+    var doubles = numbers.map(function(num) {
+      return num * 2;
+    });
+    // doubles is now [2, 8, 18]. numbers is still [1, 4, 9]
+---
+### `splice`
+Modifies an array, takes:
+
+* startIndex
+* deleteCount
+
+Additional arguments areelements to insert
+
+    var myFish = ['angel', 'clown', 'mandarin', 'surgeon'];
+
+    // removes 0 elements from index 2, and inserts 'drum'
+    var removed = myFish.splice(2, 0, 'drum');
+    // myFish is ['angel', 'clown', 'drum', 'mandarin', 'surgeon']
+    // removed is [], no elements removed
+
+    // removes 1 element from index 3
+    removed = myFish.splice(3, 1);
+    // myFish is ['angel', 'clown', 'drum', 'surgeon']
+    // removed is ['mandarin']
+
+    // removes 1 element from index 2, and inserts 'trumpet'
+    removed = myFish.splice(2, 1, 'trumpet');
+    // myFish is ['angel', 'clown', 'trumpet', 'surgeon']
+    // removed is ['drum']
+
+    // removes 2 elements from index 0, and inserts 'parrot', 'anemone' and 'blue'
+    removed = myFish.splice(0, 2, 'parrot', 'anemone', 'blue');
+    // myFish is ['parrot', 'anemone', 'blue', 'trumpet', 'surgeon']
+    // removed is ['angel', 'clown']
+
+---
+### `sort`
+Returns natural order with no argument
+
+    var fruit = ['cherries', 'apples', 'bananas'];
+    fruit.sort(); // ['apples', 'bananas', 'cherries']
+
+    var scores = [1, 10, 2, 21];
+    scores.sort(); // [1, 10, 2, 21]
+---
+### `sort`
+But can take a comparator function
+
+    var items = [
+      { name: 'Edward', value: 21 },
+      { name: 'Sharpe', value: 37 },
+      { name: 'And', value: 45 },
+      { name: 'The', value: -12 },
+      { name: 'Magnetic' },
+      { name: 'Zeros', value: 37 }
+    ];
+    items.sort(function (a, b) {
+      if (a.name > b.name) {
+        return 1;
+      }
+      if (a.name < b.name) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+---
+### `join`
+combines an array into a string with specified delimiter
+
+    var a = ['Wind', 'Rain', 'Fire'];
+    var myVar1 = a.join();      // assigns 'Wind,Rain,Fire' to myVar1
+    var myVar2 = a.join(', ');  // assigns 'Wind, Rain, Fire' to myVar2
+    var myVar3 = a.join(' + '); // assigns 'Wind + Rain + Fire' to myVar3
+    var myVar4 = a.join('');    // assigns 'WindRainFire' to myVar4
+
+### `indexOf`
+Takes element to search for, optionally start index
+
+    var array = [2, 5, 9];
+    array.indexOf(2);     // 0
+    array.indexOf(7);     // -1
+    array.indexOf(9, 2);  // 2
+    array.indexOf(2, -1); // -1
+    array.indexOf(2, -3); // 0
 ---
 class: center, middle
 # Let's have some fun with arrays
-
 ---
 ## Iterating over an object with for.. in
 
@@ -599,21 +712,33 @@ class: center, middle
 
     object.accessor()     // "foo"
 ---
-# Higher order functions
-## Functions can return functions
+## Getters and setters
+You can define accessor methods
 
-    function makeAdder(num) {
-      return function(addend) {
-        return num + addend;
-      }
+    var obj = {
+      normalProp: 1,
+      set fancyProp(val) { this.normalProp = val + 1; },
+      get fancyProp() { return this.normalProp + 1; }
+
     }
 
-    var twoAdder = makeAdder(2);
-    twoAdder(3);      // 5
+    obj.fancyProp = 4;
+    console.log(obj.fancyProp);
+
+There's more than one way to do it:
+
+    var o = { a:0 }
+
+    Object.defineProperties(o, {
+        "b": { get: function () { return this.a + 1; } },
+        "c": { set: function (x) { this.a = x / 2; } }
+    });
+
+    o.c = 10 // Runs the setter, which assigns 10 / 2 (5) to the 'a' property
+    console.log(o.b) // Runs the getter, which yields a + 1 or 6
 ---
 class: center, middle
-
-# Higher order functions
+# Fun with getters and setters
 ---
 # Scope and Closure
 ### functions have access to the parameters and variables of the function they are defined in
@@ -647,7 +772,7 @@ class: center, middle
     sequence.currentValue();    // 2
 ---
 class: center, middle
-# Binding scope
+# Pirates!
 ---
 # Apply/call invocation
 
@@ -682,9 +807,6 @@ Applying functions to objects.
     tiger.name        // "tiger"
 ### Sometimes called "class" functions
 ---
-class: center, middle
-# Let's construct some objects!
----
 # Introducing the prototype
 ### All objects have one
 ### It's not easily accessible
@@ -698,23 +820,62 @@ class: center, middle
       this.name = name;
     }
 
-    Cat.prototype.lives = 9;
+    Cat.prototype.speak = function() { return this.name + " says meow" };
 
     felix = new Cat("Felix");
-    felix.lives         // 9
+    console.log(felix.speak());    // "Felix says meow"
 
-### you can 'shadow' properties
-    felix.lives = 10
+---
+## you can 'shadow' properties
+
+    Cat.prototype.lives = 9;
+    felix.lives = 10;
     garfield = new Cat("Garfield");
     felix.lives         // 10
     garfield.lives      // 9
+
+## Properties on `prototype` are shared!
+
+    Cat.prototype.meals = [];
+    Cat.prototype.feed = function() {
+      this.meals.push("yum!");
+    }
+    garfield = new Cat("Garfield");
+    fluffy = new Cat("Fluffy");
+    garfield.feed();
+    fluffy.feed();
+    console.log(garfield.meals) // ["yum!", "yum!"];
 ---
-# Super secret knowledge you should never use
-### An object's prototype is not accessible
-### But there is a super secret `__proto__` property
+### Object.getPrototypeOf()
+Returns an objects prototype
+### Object.create(prototype)
+Create a new object with specified prototype. More straightforward than new
+---
+## Prototypes form a chain
+
+    function Animal(legs) {
+      this.numberOfLegs = legs;
+    }
+
+    Animal.prototype.walk = function() {
+      console.log("I'm walking on my " + this.numberOfLegs + " legs.");
+    }
+
+    function Cat(name) {
+      Animal.call(this, 4);
+      this.name = name;
+    }
+
+    Cat.prototype = Object.create(Animal.prototype);
+    Cat.prototype.speak = function() { console.log(this.name + " says Meow.");}
+
+    felix = new Cat("Felix");
+    felix.walk();
+    felix.speak();
+---
+# Other prototype
+### There is a super secret `__proto__` property
 ### Not part of any spec, but all browsers implement it
-### In ES5 we have Object.getPrototypeOf()
-### and Object.create(prototype)
 ---
 class: center, middle
 # Let's do some Inheritance labs1
@@ -740,7 +901,9 @@ class: center, middle
 class: center, middle
 # Strict [example](http://jsbin.com/vaporokuki/2/edit)
 ---
-# End of Day 1
+# ES 6
+* Your browser doesnt support all of it yet
+* Transpilers to the rescue!
 ---
 name: jquery_start
 # jQuery
