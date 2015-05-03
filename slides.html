@@ -776,7 +776,8 @@ class: center, middle
 ---
 # Apply/call invocation
 
-Applying functions to objects.
+Applying functions to objects. Invokes a function
+as if it were a method of an object.
 
     function doStuff () {
       return this.speed;
@@ -787,6 +788,20 @@ Applying functions to objects.
     doStuff.apply(obj, [ arg1, arg2 ]);  // 2
 
     doStuff.call(obj, arg1, arg2);     // 2
+
+---
+## `bind`
+Creates a function that is bound to an object.
+`this` will be the object passed when returned function is invoked.
+
+    function doStuff () {
+      return this.speed;
+    }
+
+    var obj = { speed: 2 };
+
+    boundDoStuff = doStuff.bind(obj);
+    console.log(boundDoStuff());
 
 ---
 # Constructor functions
@@ -878,13 +893,14 @@ Create a new object with specified prototype. More straightforward than new
 ### Not part of any spec, but all browsers implement it
 ---
 class: center, middle
-# Let's do some Inheritance labs1
+# Fun with inheritance
 
 ---
 # arguments
 ### You can pass as many or as few arguments to functions as you want
 ### Unset arguments are `undefined`
 ### `arguments` let's you access an "array" of your functions arguments
+
     function logArguments() {
       var i;
       for(i =0 ; i < arguments.length; i++)
@@ -892,6 +908,8 @@ class: center, middle
         console.log(arguments[i]);
       }
     }
+    logArguments(1, "Tree", [3,4]);
+
 ---
 # Strict mode
 ### Enable with `"use strict";`
@@ -904,6 +922,140 @@ class: center, middle
 # ES 6
 * Your browser doesnt support all of it yet
 * Transpilers to the rescue!
+* Traceur
+* Babel (formerly known as 6to5)
+---
+## Classes
+Convenienter syntax, still uses prototype
+
+    class Thing {
+      constructor(name) {
+        this.name = name;
+      }
+
+      greet() {
+        console.log("Hi, my name is " + this.name);
+      }
+    }
+
+    new Thing("Bob").greet(); // Hi, my name is Bob
+
+---
+## Improved inheritance
+Super is super
+
+    class OtherThing extends Thing {
+
+      constructor(name, feeling) {
+        super(name);
+        this.feeling = feeling;
+      }
+
+      greet() {
+        super.greet();
+        console.log(" and I feel " + this.feeling);
+      }
+    }
+
+    new OtherThing("Fred", "angry").greet();
+    // Hi, my name is Fred and I feel angry
+---
+class: middle, center
+# Let's get classy!
+---
+## Template strings
+String interpolation for javascript. About time!
+
+    var x = 5, y=3;
+
+    console.log(`${x} + ${y} = ${x + y}`);
+
+    console.log(`
+    They can span
+    all kinds of lines
+    and stuff too.
+    `);
+---
+## Arrow functions
+### Shorter function syntax
+
+    var a = [
+      "Hydrogen",
+      "Helium",
+      "Lithium",
+      "Beryl­lium"
+    ];
+
+    var a2 = a.map(function(s){ return s.length });
+
+    var a3 = a.map( s => s.length );
+---
+## Also preserves value of `this`
+
+    class Thing {
+      constructor() {
+        this.multiple = 5;
+        this.numbers = [1,2,3];
+      }
+
+      multiplyNumbers() {
+        return this.numbers.map((number) => {
+          return number * this.multiple;
+        });
+      }
+    }
+
+    console.log(new Thing().multiplyNumbers());
+---
+## Modules
+A mechanism for separating javascript into multiple files
+with explicit control over namespacing.
+
+`lib/math.js`
+
+    export function sum(x, y) {
+      return x + y;
+    }
+    export var pi = 3.141593;
+
+`app.js`
+
+    import * as math from "lib/math";
+    alert("2π = " + math.sum(math.pi, math.pi));
+
+`other_app.js`
+
+    import {sum, pi} from "lib/math";
+    alert("2π = " + sum(pi, pi));
+
+---
+## Exporting classes
+
+`lib/foo.js`
+
+    export class Foo {}
+
+`app.js`
+
+    import { Foo } from "lib/foo"
+
+## Export default
+
+`lib/foo.js`
+
+    export default class Foo {}
+
+`app.js`
+
+    import Foo from "lib/foo"
+
+
+---
+class: center, middle
+# Let's git ready for bowling kata!
+---
+## ES6 Modules aren't supported in JSBin (or any of its ilk)
+## So we'll need to git busy cloning...
 ---
 name: jquery_start
 # jQuery
